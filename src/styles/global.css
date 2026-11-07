@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================
+   Fluid REM Scaling (Cuberto Benchmark: 1rem = 10px baseline)
+   ========================================================== */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0c0d0e;
+  color: #f3f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2.66667vw; /* Mobile: 375px * 0.0266667 = 10px */
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 0.625vw; /* Desktop: 1600px * 0.00625 = 10px */
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #0c0d0e;
+}
+
+/* ==========================================================
+   Lenis Smooth Scrolling
+   ========================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================
+   Kinetic Rolling Text Effect (Cuberto Pure CSS Trick)
+   ========================================================== */
+.rolling-text {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+.rolling-text span {
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rolling-text span::after {
+  content: attr(data-text);
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: scale(0.9);
+  transition: transform 0.4s;
+  opacity: 0.9;
+}
+
+@media (pointer: fine) {
+  *:hover > .rolling-text span,
+  .rolling-text:hover span {
+    transform: translateY(-100%);
+  }
+
+  *:hover > .rolling-text span::after,
+  .rolling-text:hover span::after {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================
+   Spring Bounce Button (Cuberto Cubic Bezier Physics)
+   ========================================================== */
+.spring-btn {
+  transition: transform 0.5s cubic-bezier(0.34, 4.56, 0.64, 1);
+}
+
+@media (pointer: fine) {
+  .spring-btn:hover {
+    transform: scale(0.96);
+  }
+}
+
+/* ==========================================================
+   Accessibility & Reduced Motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

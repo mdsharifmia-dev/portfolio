@@ -1,0 +1,55 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { services } = portfolioData;
+---
+
+<section id="services" class="py-[12rem] px-8 md:px-16 bg-white/[0.015] border-y border-white/5 relative">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16">
+      <div class="text-emerald-400 font-mono text-[1.4rem] font-semibold tracking-wider uppercase mb-3">
+        // Capabilities
+      </div>
+      <h2 class="text-white text-[3.8rem] md:text-[5.4rem] font-bold tracking-tight mb-4">
+        What I Build & Deliver
+      </h2>
+      <p class="text-white/60 text-[1.8rem] max-w-2xl">
+        Focused services tailored for growing teams that need reliable automation and software without unnecessary complexity.
+      </p>
+    </div>
+
+    <!-- 3 Core Offerings -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map((service, idx) => (
+        <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-10 flex flex-col justify-between hover:border-emerald-500/40 hover:bg-white/[0.05] transition-all duration-300">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono font-bold text-[1.8rem] mb-8">
+              0{idx + 1}
+            </div>
+            <h3 class="text-white text-[2.4rem] font-bold tracking-tight mb-4">
+              {service.title}
+            </h3>
+            <p class="text-white/65 text-[1.5rem] leading-relaxed mb-8">
+              {service.shortDescription}
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-white/10">
+            <div class="text-[1.2rem] text-emerald-400/90 font-semibold uppercase tracking-wider mb-4">
+              Core Deliverables
+            </div>
+            <ul class="flex flex-col gap-3">
+              {service.features.map((feat) => (
+                <li class="flex items-start gap-2.5 text-white/70 text-[1.35rem] leading-normal">
+                  <span class="text-emerald-400 mt-1">✓</span>
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

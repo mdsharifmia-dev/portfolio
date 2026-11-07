@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <!-- Cyan to Electric Royal Blue Gradient -->
+    <linearGradient id="sm_blue" x1="40" y1="40" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="45%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+
+    <!-- Silver White Left Facet -->
+    <linearGradient id="sm_silver_left" x1="20" y1="50" x2="100" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+
+    <!-- Silver White Right Facet -->
+    <linearGradient id="sm_silver_right" x1="220" y1="50" x2="140" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="60%" stop-color="#CBD5E1"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Wing of M (Crisp Geometric Planes) -->
+  <g id="m-left-wing">
+    <!-- Primary Outer Facet -->
+    <path d="M 36 62 L 78 142 L 68 174 L 28 166 Z" fill="url(#sm_silver_left)"/>
+    <!-- Top Chamfer Highlight -->
+    <path d="M 36 62 L 78 142 L 52 118 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Bottom Return Chamfer -->
+    <path d="M 68 174 L 102 142 L 78 142 Z" fill="#64748B" opacity="0.45"/>
+  </g>
+
+  <!-- Right Wing of M (Crisp Geometric Planes - Symmetrical) -->
+  <g id="m-right-wing">
+    <!-- Primary Outer Facet -->
+    <path d="M 204 62 L 162 142 L 172 174 L 212 166 Z" fill="url(#sm_silver_right)"/>
+    <!-- Top Chamfer Highlight -->
+    <path d="M 204 62 L 162 142 L 188 118 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Bottom Return Chamfer -->
+    <path d="M 172 174 L 138 142 L 162 142 Z" fill="#475569" opacity="0.45"/>
+  </g>
+
+  <!-- S-Ribbon Interlocking Center (Seamless Vector Flow) -->
+  <g id="s-ribbon">
+    <!-- S Core Path with Smooth Bezier Tension -->
+    <path d="M 124 58 C 154 58 170 74 170 94 C 170 114 148 126 118 133 L 94 139 C 68 145 52 157 52 174 C 52 194 72 206 102 206 C 132 206 152 194 164 180" 
+          stroke="url(#sm_blue)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- S Top Terminal Return -->
+    <path d="M 124 58 C 104 58 88 68 88 84" 
+          stroke="url(#sm_blue)" stroke-width="22" stroke-linecap="round"/>
+  </g>
+</svg>

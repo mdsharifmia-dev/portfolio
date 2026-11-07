@@ -1,0 +1,32 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { personalInfo } = portfolioData;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-12 px-8 md:px-16 border-t border-white/5 bg-[#080809] text-white/50 text-[1.4rem]">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <span class="text-white font-semibold">{personalInfo.name}</span>
+      <span>•</span>
+      <span>© {currentYear} All Rights Reserved</span>
+    </div>
+
+    <div class="flex items-center gap-8">
+      <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+      <a href="#services" class="hover:text-white transition-colors">Services</a>
+      <a href={personalInfo.githubUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+      {personalInfo.linkedinUrl && (
+        <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+      )}
+      {personalInfo.youtubeUrl && (
+        <a href={personalInfo.youtubeUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">YouTube</a>
+      )}
+      <a href="#top" class="hover:text-emerald-400 transition-colors flex items-center gap-1">
+        <span>Back to top</span>
+        <span>↑</span>
+      </a>
+    </div>
+  </div>
+</footer>

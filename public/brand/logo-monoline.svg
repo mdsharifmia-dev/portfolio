@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <linearGradient id="c2_blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- M Architecture Frame -->
+  <path d="M 40 180 L 40 70 L 92 145 L 120 112 L 148 145 L 200 70 L 200 180" 
+        stroke="#F8FAFC" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- S Core Ribbon Weave -->
+  <path d="M 132 68 C 158 68 172 80 172 96 C 172 114 150 124 120 130 L 98 136 C 68 142 50 152 50 170 C 50 188 68 200 96 200 C 124 200 146 188 158 174" 
+        stroke="url(#c2_blue)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 132 68 C 112 68 96 78 96 92" 
+        stroke="url(#c2_blue)" stroke-width="16" stroke-linecap="round"/>
+</svg>

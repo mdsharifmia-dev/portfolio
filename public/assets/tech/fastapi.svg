@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <circle cx="24" cy="24" r="18" fill="#009688"/>
+  <path d="M25 11 L15 25 L23 25 L21 37 L33 21 L25 21 Z" fill="#FFFFFF"/>
+  <text x="56" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="currentColor" letter-spacing="-0.02em">FastAPI</text>
+</svg>

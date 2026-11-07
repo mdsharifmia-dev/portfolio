@@ -1,0 +1,73 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<div class={`elastic-divider-wrap w-full py-8 overflow-hidden select-none ${className}`}>
+  <svg class="elastic-svg w-full h-[6rem] stroke-white/15 stroke-[1.5px] fill-none" preserveAspectRatio="none">
+    <path class="elastic-path" d="M0,30 Q800,30 1600,30" />
+  </svg>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initElasticDividers() {
+    if (typeof window === 'undefined') return;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouch) return;
+
+    const wraps = document.querySelectorAll<HTMLElement>('.elastic-divider-wrap');
+    wraps.forEach((wrap) => {
+      const svg = wrap.querySelector<SVGSVGElement>('.elastic-svg');
+      const path = wrap.querySelector<SVGPathElement>('.elastic-path');
+      if (!svg || !path) return;
+
+      const getPathD = (cx?: number, cy?: number, width?: number) => {
+        const w = width ?? wrap.offsetWidth;
+        const midX = cx ?? w / 2;
+        const midY = cy ?? 30;
+        return `M0,30 Q${midX},${midY} ${w},30`;
+      };
+
+      // Set initial path
+      path.setAttribute('d', getPathD());
+
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = svg.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Quadratic bezier deflection
+        const controlY = mouseY;
+        gsap.to(path, {
+          attr: { d: getPathD(mouseX, controlY, rect.width) },
+          duration: 0.15,
+          overwrite: 'auto',
+          ease: 'power2.out',
+        });
+      });
+
+      wrap.addEventListener('mouseleave', () => {
+        const rect = svg.getBoundingClientRect();
+        gsap.to(path, {
+          attr: { d: getPathD(rect.width / 2, 30, rect.width) },
+          duration: 1.8,
+          ease: 'elastic.out(1, 0.2)', // Cuberto signature bounce
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        const rect = svg.getBoundingClientRect();
+        path.setAttribute('d', getPathD(rect.width / 2, 30, rect.width));
+      });
+    });
+  }
+
+  // Initialize on load and on Astro page transitions
+  document.addEventListener('astro:page-load', initElasticDividers);
+  initElasticDividers();
+</script>

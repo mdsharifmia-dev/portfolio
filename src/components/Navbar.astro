@@ -1,0 +1,74 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { personalInfo } = portfolioData;
+---
+
+<header class="navbar-root fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 px-8 md:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo / Name Wordmark -->
+    <a href="#" class="group flex items-center gap-3 text-white text-[1.8rem] font-bold tracking-tight" data-cursor="-pointer">
+      <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-xs font-mono group-hover:scale-110 transition-transform duration-300">
+        SM
+      </div>
+      <span class="rolling-text">
+        <span data-text={personalInfo.name}>{personalInfo.name}</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-10 bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl px-8 py-3.5 rounded-full text-[1.4rem] text-white/70 font-medium">
+      <a href="/" class="hover:text-white transition-colors rolling-text">
+        <span data-text="Home">Home</span>
+      </a>
+      <a href="/#projects" class="hover:text-white transition-colors rolling-text">
+        <span data-text="Projects">Projects</span>
+      </a>
+      <a href="#services" class="hover:text-white transition-colors rolling-text">
+        <span data-text="Services">Services</span>
+      </a>
+      <a href="#process" class="hover:text-white transition-colors rolling-text">
+        <span data-text="How I Work">How I Work</span>
+      </a>
+      <a href="#skills" class="hover:text-white transition-colors rolling-text">
+        <span data-text="Skills">Skills</span>
+      </a>
+      <a href="#faq" class="hover:text-white transition-colors rolling-text">
+        <span data-text="FAQ">FAQ</span>
+      </a>
+    </nav>
+
+    <!-- Header Action Button -->
+    <div class="flex items-center gap-4">
+      <a
+        href="#contact"
+        data-cursor="-pointer"
+        class="hidden sm:inline-flex items-center justify-center bg-white text-black text-[1.3rem] font-semibold px-6 py-3 rounded-full hover:bg-emerald-400 transition-colors spring-btn"
+      >
+        <span class="rolling-text">
+          <span data-text="Get In Touch">Get In Touch</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  function handleNavbarScroll() {
+    const navbar = document.querySelector('.navbar-root');
+    if (!navbar) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('bg-[#0c0d0e]/85', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-4');
+        navbar.classList.remove('py-6');
+      } else {
+        navbar.classList.remove('bg-[#0c0d0e]/85', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-4');
+        navbar.classList.add('py-6');
+      }
+    }, { passive: true });
+  }
+
+  document.addEventListener('astro:page-load', handleNavbarScroll);
+  handleNavbarScroll();
+</script>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <linearGradient id="c3_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer M Geometric Block -->
+  <path d="M 32 180 L 32 60 L 80 118 L 120 80 L 160 118 L 208 60 L 208 180 L 178 180 L 178 112 L 152 142 L 120 112 L 88 142 L 62 112 L 62 180 Z" 
+        fill="#FFFFFF"/>
+
+  <!-- S Dynamic Cutting Overlay -->
+  <path d="M 134 50 C 158 50 174 65 174 84 C 174 100 156 110 130 116 L 108 122 C 84 128 70 138 70 152 C 70 168 86 178 110 178 C 132 178 148 168 158 156" 
+        stroke="url(#c3_grad)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

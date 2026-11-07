@@ -1,0 +1,580 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { personalInfo } = portfolioData;
+const defaultWhatsappUrl = `https://wa.me/${personalInfo.whatsappNumber}?text=${encodeURIComponent(personalInfo.whatsappPresetMessage)}`;
+const defaultEmailUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent('Inquiry via AI Portfolio')}`;
+---
+
+<!-- Draggable AI Assistant Floating Widget -->
+<div id="ai-agent-container" class="fixed bottom-10 right-8 z-50 select-none touch-none">
+  
+  <!-- Living Floating Wrapper (Water bobbing + ripples) -->
+  <div id="ai-orb-wrapper" class="relative flex flex-col items-end">
+    
+    <!-- Speech Bubble Tooltip (How can I help you?) -->
+    <div
+      id="ai-speech-bubble"
+      class="mb-3 px-4 py-2.5 rounded-2xl bg-[#14161c]/90 md:bg-[#14161c]/95 border border-white/15 backdrop-blur-xl shadow-xl flex items-center gap-2.5 text-white max-w-[26rem] transition-all duration-300"
+    >
+      <div class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></div>
+      <p class="text-[1.25rem] font-medium leading-snug text-white/90">
+        Hi! I'm Sharif's AI Assistant. How can I help you?
+      </p>
+      <button
+        id="ai-bubble-dismiss"
+        type="button"
+        title="Dismiss"
+        class="text-white/40 hover:text-white text-[1.4rem] ml-1 shrink-0 p-0.5"
+      >
+        ×
+      </button>
+      <!-- Little triangle speech pointer -->
+      <div class="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#14161c]/90 border-r border-b border-white/15 rotate-45"></div>
+    </div>
+
+    <!-- The Interactive Floating Trigger Button & Sonar Waves -->
+    <div class="relative flex items-center justify-center">
+      
+      <!-- Outgoing Living Water Ripple / Sonar Waves -->
+      <span class="ai-ripple-wave absolute w-14 h-14 rounded-full bg-emerald-400/20 border border-emerald-400/30 pointer-events-none"></span>
+      <span class="ai-ripple-wave -delay absolute w-14 h-14 rounded-full bg-emerald-400/15 border border-emerald-400/25 pointer-events-none"></span>
+
+      <!-- Trigger Button -->
+      <button
+        id="ai-agent-trigger"
+        type="button"
+        aria-label="Open AI Assistant"
+        data-cursor-text="Chat / Drag"
+        class="group relative flex items-center gap-2.5 px-4 py-3 rounded-full shadow-[0_12px_35px_rgba(0,0,0,0.5)] transition-all duration-200 cursor-grab active:cursor-grabbing hover:scale-105
+               /* Mobile: Water/Glass Frosted look (semi-transparent so content is visible) */
+               bg-white/[0.08] backdrop-blur-md border border-white/20 text-white
+               /* Desktop: Rich dark glass with glowing border */
+               md:bg-[#121418]/90 md:border-white/20 md:hover:border-emerald-400/80"
+      >
+        <!-- Pulsing Center Core -->
+        <div class="relative flex items-center justify-center">
+          <span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399]" />
+          <span class="absolute w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-60" />
+        </div>
+
+        <!-- Label -->
+        <span class="text-[1.3rem] font-semibold tracking-tight text-white/95 group-hover:text-white">
+          AI Assistant
+        </span>
+
+        <span class="text-[1.3rem] group-hover:rotate-12 transition-transform">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Chat Drawer Panel (Hidden by default) -->
+  <div
+    id="ai-agent-panel"
+    class="hidden fixed bottom-24 right-6 w-[94vw] sm:w-[44rem] h-[60rem] max-h-[84vh] bg-[#111317]/95 border border-white/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl flex-col overflow-hidden z-50 transition-all duration-300"
+  >
+    <!-- Panel Header with Direct Contact Shortcuts -->
+    <div class="p-5 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5"/></svg>
+        </div>
+        <div>
+          <div class="text-[1.5rem] font-bold text-white flex items-center gap-2">
+            Sharif's AI Assistant
+            <span class="text-[1rem] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              Online
+            </span>
+          </div>
+          <div class="text-[1.15rem] text-white/50">Grounded in verified experience & projects</div>
+        </div>
+      </div>
+
+      <!-- Header Actions: Direct WhatsApp & Close -->
+      <div class="flex items-center gap-2">
+        <a
+          href={defaultWhatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Direct WhatsApp"
+          data-cursor="-pointer"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-[1.15rem] font-medium transition-colors"
+        >
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button
+          id="ai-agent-close"
+          type="button"
+          data-cursor="-pointer"
+          class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-white/70 hover:text-white text-[1.6rem] transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Message History Stream -->
+    <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-5 flex flex-col gap-4 text-[1.4rem] leading-relaxed">
+      <!-- Agent Intro Message -->
+      <div class="agent-msg max-w-[88%] self-start bg-white/[0.06] border border-white/10 text-white/90 p-4 rounded-2xl rounded-tl-sm">
+        Hello! I'm Sharif's autonomous assistant. Ask me anything about his <strong>AI Agents</strong>, <strong>WhatsApp / CRM automations</strong>, <strong>Full-Stack software</strong>, or discuss a project!
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div id="ai-quick-chips" class="flex flex-wrap gap-2 my-1">
+        <button type="button" class="quick-chip bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-white/80 text-[1.2rem] px-3.5 py-1.5 rounded-full transition-colors">
+          What can Sharif build?
+        </button>
+        <button type="button" class="quick-chip bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-white/80 text-[1.2rem] px-3.5 py-1.5 rounded-full transition-colors">
+          Show recent projects
+        </button>
+        <button type="button" class="quick-chip bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-white/80 text-[1.2rem] px-3.5 py-1.5 rounded-full transition-colors">
+          How does he work?
+        </button>
+        <button type="button" class="quick-chip bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-[1.2rem] px-3.5 py-1.5 rounded-full transition-colors font-medium">
+          Start a project / Hire Sharif →
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Input Bar with Voice (Microphone) Option -->
+    <form id="ai-chat-form" class="p-3.5 border-t border-white/10 bg-white/[0.02] flex items-center gap-2.5">
+      
+      <!-- Text Input Field -->
+      <input
+        id="ai-chat-input"
+        type="text"
+        required
+        autocomplete="off"
+        placeholder="Type a message or use mic..."
+        class="flex-1 bg-white/[0.05] border border-white/10 rounded-xl px-4 py-3 text-white text-[1.35rem] focus:outline-none focus:border-emerald-400 transition-colors"
+      />
+
+      <!-- Voice (Microphone) Speech Recognition Button -->
+      <button
+        id="ai-voice-btn"
+        type="button"
+        title="Voice to text (Click and speak)"
+        data-cursor="-pointer"
+        class="w-11 h-11 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white flex items-center justify-center text-[1.6rem] transition-all shrink-0 active:scale-95"
+      >
+        <span id="ai-voice-icon" class="flex items-center justify-center">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>
+        </span>
+      </button>
+
+      <!-- Send Button -->
+      <button
+        type="submit"
+        data-cursor="-pointer"
+        class="bg-emerald-400 hover:bg-emerald-300 text-black font-bold px-4 py-3 rounded-xl text-[1.35rem] transition-colors flex items-center justify-center shrink-0"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* 1. Gentle Floating Bobbing Animation (like a water bubble) */
+  #ai-orb-wrapper {
+    animation: floatBob 3.6s ease-in-out infinite;
+  }
+  #ai-orb-wrapper.is-dragging {
+    animation: none !important;
+  }
+
+  @keyframes floatBob {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  /* 2. Outgoing Water Ripple / Sonar Pulse Waves */
+  .ai-ripple-wave {
+    animation: ripplePulse 3.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  }
+  .ai-ripple-wave.-delay {
+    animation-delay: 1.6s;
+  }
+
+  @keyframes ripplePulse {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.35;
+    }
+    100% {
+      transform: scale(1.75);
+      opacity: 0;
+    }
+  }
+
+  /* Voice Button Recording Pulse */
+  #ai-voice-btn.-listening {
+    background-color: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.8) !important;
+    animation: micPulse 1.2s infinite ease-in-out;
+  }
+
+  @keyframes micPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.08);
+    }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    #ai-orb-wrapper, .ai-ripple-wave, #ai-voice-btn.-listening {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { processAgentQuery } from '../scripts/agentBrain';
+  import type { LeadBrief } from '../scripts/agentBrain';
+
+  function initLivingAiAssistant() {
+    const container = document.getElementById('ai-agent-container');
+    const orbWrapper = document.getElementById('ai-orb-wrapper');
+    const trigger = document.getElementById('ai-agent-trigger');
+    const panel = document.getElementById('ai-agent-panel');
+    const closeBtn = document.getElementById('ai-agent-close');
+    const speechBubble = document.getElementById('ai-speech-bubble');
+    const bubbleDismiss = document.getElementById('ai-bubble-dismiss');
+    const form = document.getElementById('ai-chat-form') as HTMLFormElement;
+    const input = document.getElementById('ai-chat-input') as HTMLInputElement;
+    const voiceBtn = document.getElementById('ai-voice-btn');
+    const voiceIcon = document.getElementById('ai-voice-icon');
+    const messages = document.getElementById('ai-chat-messages');
+    const quickChips = document.getElementById('ai-quick-chips');
+
+    if (!container || !orbWrapper || !trigger || !panel || !closeBtn || !form || !input || !messages) return;
+
+    // --- Dismiss Bubble Handler ---
+    if (bubbleDismiss && speechBubble) {
+      bubbleDismiss.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speechBubble.style.opacity = '0';
+        speechBubble.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+          speechBubble.style.display = 'none';
+        }, 300);
+      });
+    }
+
+    // --- Restore Snapped Position from localStorage ---
+    try {
+      const saved = localStorage.getItem('sharif_ai_btn_pos');
+      if (saved) {
+        const { side, y } = JSON.parse(saved);
+        const margin = 24;
+        const targetX = side === 'left' ? margin : (window.innerWidth - container.offsetWidth - margin);
+        const maxY = window.innerHeight - container.offsetHeight - margin;
+        const targetY = Math.max(margin, Math.min(maxY, y));
+
+        container.style.right = 'auto';
+        container.style.bottom = 'auto';
+        container.style.left = `${targetX}px`;
+        container.style.top = `${targetY}px`;
+      }
+    } catch (_) {}
+
+    // --- Draggable with Magnetic Margin Snapping ---
+    let isPointerDown = false;
+    let hasMoved = false;
+    let startX = 0;
+    let startY = 0;
+    let initialLeft = 0;
+    let initialTop = 0;
+
+    trigger.addEventListener('pointerdown', (e) => {
+      isPointerDown = true;
+      hasMoved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+
+      const rect = container.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+
+      orbWrapper.classList.add('is-dragging');
+      trigger.setPointerCapture(e.pointerId);
+    });
+
+    trigger.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      if (!hasMoved && Math.hypot(dx, dy) > 5) {
+        hasMoved = true;
+      }
+
+      if (hasMoved) {
+        const newLeft = initialLeft + dx;
+        const newTop = initialTop + dy;
+
+        container.style.right = 'auto';
+        container.style.bottom = 'auto';
+        container.style.left = `${newLeft}px`;
+        container.style.top = `${newTop}px`;
+      }
+    });
+
+    trigger.addEventListener('pointerup', (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      trigger.releasePointerCapture(e.pointerId);
+      orbWrapper.classList.remove('is-dragging');
+
+      if (hasMoved) {
+        const rect = container.getBoundingClientRect();
+        const margin = 24;
+        const isLeftSide = rect.left + rect.width / 2 < window.innerWidth / 2;
+        const targetX = isLeftSide ? margin : (window.innerWidth - rect.width - margin);
+        const maxY = window.innerHeight - rect.height - margin;
+        const targetY = Math.max(margin, Math.min(maxY, rect.top));
+
+        gsap.to(container, {
+          left: targetX,
+          top: targetY,
+          duration: 0.45,
+          ease: 'back.out(1.2)',
+          onComplete: () => {
+            try {
+              localStorage.setItem('sharif_ai_btn_pos', JSON.stringify({
+                side: isLeftSide ? 'left' : 'right',
+                y: targetY,
+              }));
+            } catch (_) {}
+          },
+        });
+      } else {
+        togglePanel();
+      }
+    });
+
+    // --- Voice Input (Speech-to-Text via Web Speech API) ---
+    let isListening = false;
+    let recognition: any = null;
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (SpeechRecognition && voiceBtn && voiceIcon) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US'; // Supports international speech
+
+      recognition.onstart = () => {
+        isListening = true;
+        voiceBtn.classList.add('-listening');
+        voiceIcon.innerHTML = '<span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>';
+        input.placeholder = 'Listening... Speak your question now...';
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          input.value = transcript;
+        }
+      };
+
+      recognition.onerror = () => {
+        stopVoiceRecognition();
+      };
+
+      recognition.onend = () => {
+        stopVoiceRecognition();
+      };
+
+      const stopVoiceRecognition = () => {
+        isListening = false;
+        voiceBtn.classList.remove('-listening');
+        voiceIcon.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>';
+        input.placeholder = 'Type a message or use mic...';
+      };
+
+      voiceBtn.addEventListener('click', () => {
+        if (!recognition) return;
+        if (isListening) {
+          recognition.stop();
+        } else {
+          try {
+            recognition.start();
+          } catch (_) {
+            recognition.stop();
+          }
+        }
+      });
+    } else if (voiceBtn) {
+      voiceBtn.title = 'Voice recognition not supported in this browser';
+      voiceBtn.addEventListener('click', () => {
+        alert('Voice-to-text is supported on Google Chrome, Edge, and modern Android browsers.');
+      });
+    }
+
+    // --- Chat Panel Open/Close ---
+    let isOpen = false;
+
+    const togglePanel = (show?: boolean) => {
+      isOpen = show !== undefined ? show : !isOpen;
+      if (isOpen) {
+        panel.classList.remove('hidden');
+        panel.classList.add('flex');
+        input.focus();
+      } else {
+        panel.classList.remove('flex');
+        panel.classList.add('hidden');
+      }
+    };
+
+    closeBtn.addEventListener('click', () => togglePanel(false));
+
+    // --- Message Exchange & 1-Click Action Cards ---
+    const appendUserMessage = (text: string) => {
+      const bubble = document.createElement('div');
+      bubble.className = 'user-msg max-w-[85%] self-end bg-emerald-500/20 border border-emerald-500/40 text-white p-4 rounded-2xl rounded-tr-sm';
+      bubble.textContent = text;
+      messages.appendChild(bubble);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
+    const appendAgentMessage = (text: string, leadBrief?: LeadBrief) => {
+      const bubble = document.createElement('div');
+      bubble.className = 'agent-msg max-w-[90%] self-start bg-white/[0.06] border border-white/10 text-white/90 p-4 rounded-2xl rounded-tl-sm flex flex-col gap-3';
+
+      const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br/>');
+      bubble.innerHTML = `<div>${formatted}</div>`;
+
+      // 1-Click WhatsApp & Email Action Card
+      if (leadBrief) {
+        const leadCard = document.createElement('div');
+        leadCard.className = 'mt-3 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex flex-col gap-3.5';
+        leadCard.innerHTML = `
+          <div class="flex items-center gap-2 text-emerald-400 font-semibold text-[1.2rem] uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            1-Click Direct Notification Options
+          </div>
+          <p class="text-white/80 text-[1.3rem] leading-normal">
+            Choose either channel to notify Sharif instantly with your pre-packaged inquiry:
+          </p>
+
+          <!-- 1-Click WhatsApp Button -->
+          <a
+            href="${leadBrief.whatsappUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2.5 bg-emerald-400 hover:bg-emerald-300 text-black text-[1.35rem] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+          >
+            <span>Send Message on WhatsApp (1-Click) &rarr;</span>
+          </a>
+
+          <!-- 1-Click Email Button -->
+          <a
+            href="${leadBrief.emailUrl}"
+            class="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[1.35rem] font-semibold px-4 py-3 rounded-xl transition-colors"
+          >
+            <span>Send Email to Sharif (1-Click) &rarr;</span>
+          </a>
+
+          <!-- Copy Email Row -->
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 text-[1.2rem]">
+            <span class="text-white/60 font-mono">${leadBrief.emailAddress}</span>
+            <button
+              type="button"
+              class="copy-lead-email text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+              data-copy-text="${leadBrief.emailAddress}"
+            >
+              Copy Email
+            </button>
+          </div>
+        `;
+
+        // Handle Copy Email Click
+        const copyBtn = leadCard.querySelector('.copy-lead-email');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const text = (copyBtn as HTMLElement).dataset.copyText || '';
+            try {
+              await navigator.clipboard.writeText(text);
+              copyBtn.textContent = 'Copied';
+              setTimeout(() => {
+                copyBtn.textContent = 'Copy Email';
+              }, 2000);
+            } catch (_) {}
+          });
+        }
+
+        bubble.appendChild(leadCard);
+      }
+
+      messages.appendChild(bubble);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
+    const handleSend = (text: string) => {
+      if (!text.trim()) return;
+      appendUserMessage(text);
+
+      if (quickChips) quickChips.style.display = 'none';
+
+      const typing = document.createElement('div');
+      typing.className = 'text-white/40 text-[1.2rem] italic self-start ml-2';
+      typing.textContent = 'Agent is thinking...';
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(() => {
+        if (typing.parentNode) typing.parentNode.removeChild(typing);
+        const res = processAgentQuery(text);
+        appendAgentMessage(res.reply, res.leadBrief);
+      }, 350);
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = input.value;
+      input.value = '';
+      handleSend(val);
+    });
+
+    if (quickChips) {
+      quickChips.querySelectorAll<HTMLButtonElement>('.quick-chip').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const text = btn.textContent?.trim().replace(/→$/, '').trim() || '';
+          handleSend(text);
+        });
+      });
+    }
+
+    // Keep within bounds on window resize
+    window.addEventListener('resize', () => {
+      const rect = container.getBoundingClientRect();
+      const margin = 24;
+      const maxX = window.innerWidth - rect.width - margin;
+      const maxY = window.innerHeight - rect.height - margin;
+      if (rect.left > maxX) container.style.left = `${Math.max(margin, maxX)}px`;
+      if (rect.top > maxY) container.style.top = `${Math.max(margin, maxY)}px`;
+    });
+  }
+
+  document.addEventListener('astro:page-load', initLivingAiAssistant);
+  initLivingAiAssistant();
+</script>

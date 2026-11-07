@@ -1,0 +1,41 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { workProcess } = portfolioData;
+---
+
+<section id="process" class="py-[12rem] px-8 md:px-16 relative">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16">
+      <div class="text-emerald-400 font-mono text-[1.4rem] font-semibold tracking-wider uppercase mb-3">
+        // Methodology
+      </div>
+      <h2 class="text-white text-[3.8rem] md:text-[5.4rem] font-bold tracking-tight mb-4">
+        How I Work
+      </h2>
+      <p class="text-white/60 text-[1.8rem] max-w-2xl">
+        A clear, transparent engineering process ensuring fixed-scope delivery, predictable milestones, and dependable software.
+      </p>
+    </div>
+
+    <!-- 5-Step Linear Sequence -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+      {workProcess.map((step) => (
+        <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-white/30 transition-all duration-300">
+          <div>
+            <div class="text-emerald-400 font-mono text-[2.8rem] font-bold mb-4 opacity-80">
+              {step.stepNumber}
+            </div>
+            <h3 class="text-white text-[1.8rem] font-bold mb-3 tracking-tight">
+              {step.title}
+            </h3>
+          </div>
+          <p class="text-white/60 text-[1.35rem] leading-relaxed mt-4 pt-4 border-t border-white/5">
+            {step.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

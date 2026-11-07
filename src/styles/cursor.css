@@ -1,0 +1,73 @@
+/* ==========================================================
+   Custom Mouse Follower Styles (@cuberto/mouse-follower)
+   ========================================================== */
+.mf-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  direction: ltr;
+  pointer-events: none;
+  user-select: none;
+  contain: layout style size;
+  transition: opacity 0.3s, color 0.4s;
+}
+
+@media (pointer: coarse) {
+  .mf-cursor {
+    display: none !important;
+  }
+}
+
+.mf-cursor::before {
+  content: "";
+  position: absolute;
+  top: -2.4rem;
+  left: -2.4rem;
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  transform: scale(0.2);
+  background: currentColor;
+  border-radius: 50%;
+  transition: transform 0.25s ease-in-out, opacity 0.1s;
+}
+
+.mf-cursor.-pointer::before {
+  transform: scale(0.6);
+  opacity: 0.8;
+}
+
+.mf-cursor.-text::before {
+  transform: scale(2.2);
+  opacity: 0.95;
+}
+
+.mf-cursor.-opaque::before {
+  transform: scale(1.5);
+  background: #ffffff;
+}
+
+.mf-cursor-text {
+  position: absolute;
+  top: -1.8rem;
+  left: -5rem;
+  width: 10rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #0c0d0e;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mf-cursor.-text .mf-cursor-text {
+  opacity: 1;
+  transform: scale(1);
+}

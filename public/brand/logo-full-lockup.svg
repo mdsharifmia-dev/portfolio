@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 160" fill="none">
+  <defs>
+    <linearGradient id="lockup_blue" x1="0" y1="0" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="silver_left" x1="0" y1="0" x2="80" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon (Scale & Positioned) -->
+  <g transform="translate(10, 10) scale(0.6)">
+    <!-- Left Wing of M -->
+    <path d="M 36 62 L 78 142 L 68 174 L 28 166 Z" fill="url(#silver_left)"/>
+    <path d="M 36 62 L 78 142 L 52 118 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Right Wing of M -->
+    <path d="M 204 62 L 162 142 L 172 174 L 212 166 Z" fill="#CBD5E1"/>
+    <path d="M 204 62 L 162 142 L 188 118 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- S Core -->
+    <path d="M 124 58 C 154 58 170 74 170 94 C 170 114 148 126 118 133 L 94 139 C 68 145 52 157 52 174 C 52 194 72 206 102 206 C 132 206 152 194 164 180" 
+          stroke="url(#lockup_blue)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 124 58 C 104 58 88 68 88 84" 
+          stroke="url(#lockup_blue)" stroke-width="22" stroke-linecap="round"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <!-- Name: MD SHARIF MIA with dual tone (SHARIF highlighted) -->
+  <text x="170" y="86" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="44" font-weight="800" letter-spacing="2" fill="#FFFFFF">
+    MD <tspan fill="#38BDF8">SHARIF</tspan> MIA
+  </text>
+  
+  <!-- Subtle Sub-Label: AI & SOFTWARE ENGINEER -->
+  <text x="172" y="118" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="15" font-weight="600" letter-spacing="6" fill="#94A3B8">
+    AI &amp; SOFTWARE ENGINEER
+  </text>
+</svg>

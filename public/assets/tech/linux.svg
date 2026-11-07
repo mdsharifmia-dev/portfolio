@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <circle cx="24" cy="24" r="18" fill="#E95420"/>
+  <circle cx="24" cy="24" r="12" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="34" cy="24" r="3" fill="#FFFFFF"/>
+  <circle cx="19" cy="15.3" r="3" fill="#FFFFFF"/>
+  <circle cx="19" cy="32.7" r="3" fill="#FFFFFF"/>
+  <text x="54" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="currentColor" letter-spacing="-0.02em">Ubuntu Linux</text>
+</svg>

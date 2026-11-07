@@ -1,0 +1,76 @@
+---
+import { portfolioData } from '../data/portfolioData';
+
+const { personalInfo } = portfolioData;
+---
+
+<section class="hero-section min-h-screen pt-[16rem] pb-[10rem] px-8 md:px-16 flex flex-col justify-center relative overflow-hidden">
+  <!-- Subtle Ambient Glow -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] bg-emerald-500/10 rounded-full blur-[14rem] pointer-events-none" />
+
+  <div class="max-w-6xl mx-auto w-full relative z-10 flex flex-col items-start">
+    <!-- Availability Badge -->
+    <div class="inline-flex items-center gap-3 bg-white/[0.05] border border-white/10 px-5 py-2.5 rounded-full mb-10">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+      <span class="text-[1.3rem] font-medium text-white/80 tracking-wide">{personalInfo.availabilityText}</span>
+    </div>
+
+    <!-- Hero Role -->
+    <h2 class="text-white/60 text-[1.8rem] md:text-[2.2rem] font-medium tracking-tight mb-4 uppercase">
+      {personalInfo.title}
+    </h2>
+
+    <!-- Fluid Massive Headline -->
+    <h1 class="hero-title text-white text-[4.4rem] sm:text-[6.2rem] md:text-[8rem] font-bold leading-[1.05] tracking-tight mb-8 max-w-5xl">
+      AI Automation & Software That Solves Real Business Problems.
+    </h1>
+
+    <!-- Bio Description -->
+    <p class="text-white/70 text-[1.8rem] md:text-[2.2rem] leading-relaxed max-w-3xl mb-12 font-normal">
+      {personalInfo.bio}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap items-center gap-6">
+      <a
+        href="#projects"
+        data-cursor="-pointer"
+        class="inline-flex items-center justify-center bg-white text-black text-[1.6rem] font-semibold px-9 py-5 rounded-full hover:bg-emerald-400 transition-colors spring-btn"
+      >
+        <span class="rolling-text">
+          <span data-text="Explore Projects">Explore Projects</span>
+        </span>
+      </a>
+
+      <a
+        href="#contact"
+        data-cursor="-pointer"
+        class="inline-flex items-center justify-center bg-white/[0.08] border border-white/15 text-white text-[1.6rem] font-medium px-9 py-5 rounded-full hover:bg-white/20 transition-colors spring-btn"
+      >
+        <span class="rolling-text">
+          <span data-text="Start a Project">Start a Project</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Quick Credentials Strip -->
+    <div class="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <div class="text-[1.3rem] text-white/50 uppercase tracking-wider mb-2">Location</div>
+        <div class="text-[1.6rem] font-medium text-white">{personalInfo.location}</div>
+      </div>
+      <div>
+        <div class="text-[1.3rem] text-white/50 uppercase tracking-wider mb-2">Specialization</div>
+        <div class="text-[1.6rem] font-medium text-white">RAG & AI Agents</div>
+      </div>
+      <div>
+        <div class="text-[1.3rem] text-white/50 uppercase tracking-wider mb-2">Automation</div>
+        <div class="text-[1.6rem] font-medium text-white">Meta API & n8n</div>
+      </div>
+      <div>
+        <div class="text-[1.3rem] text-white/50 uppercase tracking-wider mb-2">Stack</div>
+        <div class="text-[1.6rem] font-medium text-white">Python, FastAPI, Astro</div>
+      </div>
+    </div>
+  </div>
+</section>

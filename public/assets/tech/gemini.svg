@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <path d="M24 4 C24 15 15 24 4 24 C15 24 24 33 24 44 C24 33 33 24 44 24 C33 24 24 15 24 4Z" fill="url(#gemini_grad)"/>
+  <defs>
+    <linearGradient id="gemini_grad" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1A73E8"/>
+      <stop offset="50%" stop-color="#8AB4F8"/>
+      <stop offset="100%" stop-color="#C58AF9"/>
+    </linearGradient>
+  </defs>
+  <text x="56" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="currentColor" letter-spacing="-0.02em">Gemini AI</text>
+</svg>
