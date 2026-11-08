@@ -12,7 +12,7 @@ export const portfolioData: PortfolioData = {
     whatsappNumber: '8801823286674',
     whatsappPresetMessage: 'Hello Sharif, I saw your portfolio and would like to discuss an AI/automation project.',
     githubUrl: 'https://github.com/mdsharifmia-dev',
-    linkedinUrl: 'https://www.linkedin.com/in/mdsharifmia',
+    linkedinUrl: 'https://www.linkedin.com/in/mdsharifmiadev',
     youtubeUrl: 'https://www.youtube.com/@mdsharifmia-dev',
   },
 
