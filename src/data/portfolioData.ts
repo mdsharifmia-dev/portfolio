@@ -4,8 +4,8 @@ export const portfolioData: PortfolioData = {
   personalInfo: {
     name: 'MD SHARIF MIA',
     title: 'AI & Automation Engineer | AI Solutions & Full-Stack Developer',
-    headline: 'AI Automation & Software That Solves Real Business Problems',
-    bio: 'I build practical AI assistants, workflow automations, and full-stack web applications to help teams eliminate repetitive tasks, optimize client communication, and scale operational efficiency.',
+    headline: 'Build Smart. Automate More. Grow Faster.',
+    bio: 'I architect practical autonomous AI agents, enterprise WhatsApp automations, and high-performance full-stack web applications that eliminate repetitive bottlenecks and scale measurable business growth.',
     location: 'Dhaka, Bangladesh',
     availabilityText: 'Available for freelance projects & contracts',
     email: 'mdsharifmia.dev@gmail.com',
