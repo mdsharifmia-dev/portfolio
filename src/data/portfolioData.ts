@@ -42,6 +42,21 @@ export const portfolioData: PortfolioData = {
       ],
     },
     {
+      id: 'custom-saas',
+      title: 'Custom SaaS & Enterprise Software Development',
+      shortDescription: 'Engineering scalable multi-tenant SaaS products and enterprise business systems with modern architecture, role-based access, and automated billing.',
+      iconName: 'Server',
+      features: [
+        'Multi-Tenant SaaS Architecture',
+        'Admin & User Dashboards',
+        'Backend API Development',
+        'Database Architecture',
+        'Authentication & Role-Based Access',
+        'Subscription & Billing Systems',
+      ],
+      caseStudy: 'Madrasha Management ERP',
+    },
+    {
       id: 'web-apps',
       title: 'Full-Stack Web Applications',
       shortDescription: 'Ultra-fast, accessible web applications engineered with modern frameworks for internal enterprise tools, client portals, and real-time dashboards.',
