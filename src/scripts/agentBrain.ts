@@ -91,7 +91,7 @@ export function processAgentQuery(query: string, conversationHistory: ChatMessag
   // 6. Specific Technologies (RAG, Gemini, Python, WhatsApp, n8n)
   if (clean.includes('rag') || clean.includes('vector') || clean.includes('gemini') || clean.includes('llm') || clean.includes('langchain')) {
     return {
-      reply: `Sharif architects custom **RAG (Retrieval-Augmented Generation)** systems using Gemini API, vector embeddings, and semantic search. These allow companies to query their internal documents, policies, or technical guides with grounded source citations and zero hallucination.`,
+      reply: `Sharif architects custom **RAG (Retrieval-Augmented Generation)** systems using Gemini API, vector embeddings, and semantic search. These allow companies to query their internal documents, policies, or technical guides with grounded source citations, semantic validation, and context verification.`,
       isLeadIntent: false,
     };
   }

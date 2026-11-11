@@ -86,8 +86,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: 'https://github.com/mdsharifmia-dev/Email-Automation',
       impactMetric: {
         label: 'Response Latency',
-        value: '< 2 min auto-resolution',
-        evidenceNote: 'Instant intent detection and Telegram alert',
+        value: 'Rapid auto-resolution',
+        evidenceNote: 'Automated intent detection and Telegram alert',
       },
     },
     {
@@ -147,7 +147,7 @@ export const portfolioData: PortfolioData = {
       title: 'Kinetic AI Portfolio & Web Engine',
       summary: 'High-performance portfolio web engine built with Astro 5, TypeScript, GSAP kinetic animations, Lenis smooth scrolling, and an interactive AI assistant.',
       problem: 'Standard developer portfolios look generic and fail to showcase cutting-edge motion engineering or interactive AI capabilities.',
-      solution: 'Engineered a 60fps Cuberto-style kinetic interface with responsive typography, dark/light themes, and edge deployment on Cloudflare Pages.',
+      solution: 'Engineered a fluid Cuberto-style kinetic interface with responsive typography, dark/light themes, and edge deployment on Cloudflare Pages.',
       role: 'Full architecture, kinetic motion tuning, accessibility, and autonomous AI assistant integration.',
       category: 'Web Apps',
       status: 'Live',
@@ -156,8 +156,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: 'https://github.com/mdsharifmia-dev/portfolio',
       impactMetric: {
         label: 'Performance',
-        value: '100/100 Lighthouse performance',
-        evidenceNote: 'Sub-second edge asset delivery globally',
+        value: 'Optimized performance',
+        evidenceNote: 'Fast edge asset delivery globally',
       },
     },
   ],
